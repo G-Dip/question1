@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String _modeName = "Light Mode";
-  String _colorName = "white";
+  Color _colorName = Colors.white;
   get modeName => _modeName;
   get colorName => _colorName;
 
@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.white,
       body: Center(
         child: Text(
-          'Light mode!',
+          modeName,
           style: TextStyle(
             color: Colors.pink,
             fontSize: 50,
@@ -39,16 +39,29 @@ class _HomeState extends State<Home> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          FloatingActionButton.extended(
-            label: Text('Dark Mode'),
-            onPressed: null,
+          myButton(
+            'Dark Mode',
+            () {
+              modeName = "Dark Mode";
+              colorName = "black";
+            },
           ),
-          FloatingActionButton.extended(
-            label: Text('Light Mode'),
-            onPressed: null,
+          myButton(
+            'Light Mode',
+            () {
+              modeName = "Light Mode";
+              colorName = "white";
+            },
           ),
         ],
       ),
     );
   }
+}
+
+FloatingActionButton myButton(btnName, function) {
+  return FloatingActionButton.extended(
+    onPressed: function,
+    label: Text(btnName),
+  );
 }
